@@ -1,5 +1,13 @@
 class TasksController < ApplicationController
+  def create
+    task = Task.new
+    task.save!
+    redirect_to tasks_url,notice: "タスク「#{task.name}を登録しました」"
+  end
+    
+  
   def index
+    @tasks = Task.all
   end
 
   def show
@@ -11,4 +19,17 @@ class TasksController < ApplicationController
 
   def edit
   end
+
+
+  private
+
+def task_params
+  params.require(:task).permit(:name, :description)
+
+  end
 end
+
+
+
+
+
